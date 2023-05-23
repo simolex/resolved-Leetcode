@@ -5,10 +5,21 @@ const rl = readline.createInterface({
     output: process.stdout,
 });
 
-const switchOperation(n)
-
 rl.on("line", (line) => {
     const n = Number(line);
+    const results = [];
+
+    const switchOperation = function (prevValue, newValue) {
+        if (newValue === n) {
+            const res = [newValue];
+            results.push(res);
+            return res;
+        }
+        if (newValue < n) {
+        }
+
+        return false;
+    };
     let N = 1;
     const oper1 = [1];
     while (N < n) {
