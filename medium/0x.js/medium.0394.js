@@ -7,11 +7,11 @@
 var decodeString = function (s) {
     let backets = [];
     let current;
-    const regDigit = /[0-9]/;
+    const regDigit = /[0-9]+/;
     return s.split("").reduce((stack, t) => {
         if (regDigit.test(t)) {
             current = stack.pop();
-            if (/[0-9]+/.test(current)) {
+            if (regDigit.test(current)) {
             }
         } else {
         }
