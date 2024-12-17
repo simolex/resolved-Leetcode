@@ -5,12 +5,12 @@
  * @param {number} repeatLimit
  * @return {string}
  */
+
 var repeatLimitedString = function (s, repeatLimit) {
     let len = s.length;
     let sortedChars = s.split("");
 
     sortedChars.sort((a, b) => b[0].localeCompare(a[0]));
-    // console.log(sortedChars.join(""));
 
     let current;
     let right = 0;
@@ -18,6 +18,7 @@ var repeatLimitedString = function (s, repeatLimit) {
         while (right < len && sortedChars[left] === sortedChars[right]) {
             right++;
         }
+
         while (
             right <= len &&
             left + repeatLimit < right &&
@@ -40,7 +41,6 @@ var repeatLimitedString = function (s, repeatLimit) {
         }
     }
 
-    // console.log(len, right, sortedChars);
     return sortedChars.slice(0, len).join("");
 };
 
