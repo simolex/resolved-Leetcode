@@ -1,15 +1,29 @@
-with g as (
-	select 
-  		a.account_id,
-  		sum(a.income)  salary
-  	from accounts a
-  	group by a.account_id
+/**
+ * 1907. Count Salary Categories
+ */
+
+WITH 
+all_category AS (
+    SELECT 'Low Salary' category
+        UNION ALL
+    SELECT 'Average Salary' category  
+        UNION ALL
+    SELECT 'High Salary' category),
+counting AS ( 
+    SELECT 
+	    CASE
+            WHEN a.income <20000 THEN 'Low Salary'
+            WHEN a.income <=50000 THEN 'Average Salary'
+            ELSE 'High Salary'
+        END category,
+        COUNT(*)  accounts_count 
+    FROM  accounts a
+    GROUP BY category
 )
+
 SELECT 
-	CASE
-    	when g.salary <20000 then 'Low Salary'
-    	when g.salary <=50000 then 'Average Salary'
-    	Else 'High Salary'
-   END sasas
-        
-FROM  g
+    ac.category,  
+    COALESCE (accounts_count, 0) accounts_count
+FROM all_category ac 
+    LEFT JOIN counting c 
+	    ON ac.category = c.category
