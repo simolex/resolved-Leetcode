@@ -20,7 +20,9 @@ var findCircleNum = function (isConnected) {
                 currentCity = stack.pop();
                 visited[currentCity] = true;
                 for (let j = 0; j < n; j++) {
-                    if (!!isConnected[currentCity][j] && !visited[i]) stack.push(i);
+                    if (isConnected[currentCity][j] == 1 && !visited[j]) {
+                        stack.push(j);
+                    }
                 }
             }
         }
