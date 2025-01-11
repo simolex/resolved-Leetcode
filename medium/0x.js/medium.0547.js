@@ -11,25 +11,17 @@ var findCircleNum = function (isConnected) {
     const n = isConnected.length;
     const visited = Array(n).fill(false);
     const stack = [];
-    const next = new Set();
 
     for (let i = 0; i < n; i++) {
         if (!visited[i]) {
             count++;
             stack.push(i);
             while (stack.length > 0) {
-                next.clear();
                 currentCity = stack.pop();
                 visited[currentCity] = true;
                 for (let j = 0; j < n; j++) {
-                    if (!!isConnected[currentCity][j]) next.add(j);
-                    if (!!isConnected[j][currentCity]) next.add(j);
+                    if (!!isConnected[currentCity][j] && !visited[i]) stack.push(i);
                 }
-                [...next.values()].forEach((i) => {
-                    if (!visited[i]) {
-                        stack.push(i);
-                    }
-                });
             }
         }
     }
