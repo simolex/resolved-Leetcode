@@ -1,0 +1,53 @@
+/**
+ * 547. Number of Provinces
+ *
+ * @param {number[][]} isConnected
+ * @return {number}
+ */
+var findCircleNum = function (isConnected) {
+    let count = 0;
+    let currentCity;
+
+    const n = isConnected.length;
+    const visited = Array(n).fill(false);
+    const stack = [];
+    const next = new Set();
+
+    for (let i = 0; i < n; i++) {
+        if (!visited[i]) {
+            count++;
+            stack.push(i);
+            while (stack.length > 0) {
+                next.clear();
+                currentCity = stack.pop();
+                visited[currentCity] = true;
+                for (let j = 0; j < n; j++) {
+                    if (!!isConnected[currentCity][j]) next.add(j);
+                    if (!!isConnected[j][currentCity]) next.add(j);
+                }
+                [...next.values()].forEach((i) => {
+                    if (!visited[i]) {
+                        stack.push(i);
+                    }
+                });
+            }
+        }
+    }
+
+    return count;
+};
+
+console.log(
+    findCircleNum([
+        [1, 1, 0],
+        [1, 1, 0],
+        [0, 0, 1]
+    ])
+);
+console.log(
+    findCircleNum([
+        [1, 0, 0],
+        [0, 1, 0],
+        [0, 0, 1]
+    ])
+);
