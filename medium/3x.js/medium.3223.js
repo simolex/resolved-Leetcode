@@ -6,20 +6,15 @@
  */
 var minimumLength = function (s) {
     const freqLetters = s.split("").reduce((hashSet, l) => {
-        if (!hashSet.has(l)) {
-            hashSet.set(l, { cnt: 0 });
+        if (hashSet[l] === 2) {
+            hashSet[l] = 0;
         }
 
-        if (hashSet.get(l).cnt === 2) {
-            hashSet.get(l).cnt = 0;
-        }
-
-        hashSet.get(l).cnt++;
-
+        hashSet[l] = -~hashSet[l];
         return hashSet;
-    }, new Map());
+    }, {});
 
-    return [...freqLetters.values()].map(({ cnt }) => cnt).reduce((restLength, c) => restLength + c, 0);
+    return Object.keys(freqLetters).reduce((restLength, l) => restLength + freqLetters[l], 0);
 };
 
 console.log(minimumLength("abaacbcbb"));
