@@ -9,13 +9,17 @@ var minimumLength = function (s) {
         if (!hashSet.has(l)) {
             hashSet.set(l, { cnt: 0 });
         }
+
+        if (hashSet.get(l).cnt === 2) {
+            hashSet.get(l).cnt = 0;
+        }
+
         hashSet.get(l).cnt++;
+
         return hashSet;
     }, new Map());
 
-    return [...freqLetters.values()]
-        .map(({ cnt }) => cnt)
-        .reduce((restLength, c) => restLength + (c > 2 ? ((c - 1) % 2) + 1 : c), 0);
+    return [...freqLetters.values()].map(({ cnt }) => cnt).reduce((restLength, c) => restLength + c, 0);
 };
 
 console.log(minimumLength("abaacbcbb"));
