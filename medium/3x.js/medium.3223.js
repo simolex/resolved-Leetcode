@@ -6,15 +6,11 @@
  */
 var minimumLength = function (s) {
     const freqLetters = s.split("").reduce((hashSet, l) => {
-        if (hashSet[l] === 2) {
-            hashSet[l] = 0;
-        }
-
-        hashSet[l] = -~hashSet[l];
+        hashSet[l.charCodeAt(0) - "a".charCodeAt(0)]++;
         return hashSet;
-    }, {});
+    }, Array(26).fill(0));
 
-    return Object.keys(freqLetters).reduce((restLength, l) => restLength + freqLetters[l], 0);
+    return freqLetters.reduce((restLength, c) => restLength + ((c - 1) % 2) + 1, 0);
 };
 
 console.log(minimumLength("abaacbcbb"));
