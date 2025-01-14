@@ -29,5 +29,31 @@ var findThePrefixCommonArray = function (A, B) {
     return result;
 };
 
+var findThePrefixCommonArray = function (A, B) {
+    const n = A.length;
+    const pattern = {};
+
+    const result = [];
+    let prefixSum = 0;
+    for (let i = 0; i < n; i++) {
+        pattern[A[i]] = -~pattern[A[i]];
+        pattern[B[i]] = -~pattern[B[i]];
+
+        if (A[i] === B[i]) {
+            prefixSum++;
+        } else {
+            if (pattern[A[i]] > 1) {
+                prefixSum++;
+            }
+            if (pattern[B[i]] > 1) {
+                prefixSum++;
+            }
+        }
+
+        result.push(prefixSum);
+    }
+    return result;
+};
+
 console.log(findThePrefixCommonArray([1, 3, 2, 4], [3, 1, 2, 4]));
 console.log(findThePrefixCommonArray([2, 3, 1], [3, 1, 2]));
