@@ -67,6 +67,7 @@ class MinHeap {
 }
 
 var SmallestInfiniteSet = function () {
+    this.heapSet = new Set();
     this.heap = new MinHeap();
     this.counter = 1;
 };
@@ -79,6 +80,7 @@ SmallestInfiniteSet.prototype.popSmallest = function () {
         if (this.heap.peak() === this.counter) {
             this.counter++;
         }
+        this.heapSet.delete(this.heap.peak());
         return this.heap.pop();
     }
 
@@ -90,7 +92,12 @@ SmallestInfiniteSet.prototype.popSmallest = function () {
  * @return {void}
  */
 SmallestInfiniteSet.prototype.addBack = function (num) {
-    if (num < this.counter) this.heap.push(num);
+    if (num < this.counter) {
+        if (!this.heapSet.has(num)) {
+            this.heapSet.add(num);
+            this.heap.push(num);
+        }
+    }
 };
 
 /**
