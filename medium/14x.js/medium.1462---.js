@@ -35,9 +35,9 @@ var checkIfPrerequisite = function (numCourses, prerequisites, queries) {
                 graph.get(current).forEach((v) => {
                     accessable.forEach((from) => from.add(v));
                     cloneNextable[v]--;
-                    if (cloneNextable[v] === 0) {
+                    // if (cloneNextable[v] === 0) {
                         queue.push(v);
-                    }
+                    // }
                 });
             }
         }
