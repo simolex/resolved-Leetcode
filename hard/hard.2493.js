@@ -17,8 +17,6 @@ var magnificentSets = function (n, edges) {
         graph[vertex_2 - 1].push(vertex_1 - 1);
     }
 
-    // console.log(graph);
-
     let currentVertex;
     let currentGroup = 1;
     let maxGroup = 0;
