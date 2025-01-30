@@ -7,27 +7,17 @@
  */
 var magnificentSets = function (n, edges) {
     let e = edges.length;
-    const graph = new Map();
-    const allVertex = Array(n + 1).fill(0);
-    let markVertex = Array(n + 1).fill(-1);
-    let vertex_1;
-    let vertex_2;
+    const graph = Array.from({ length: n }, () => []);
+    let markVertex = Array(n).fill(-1);
+    let vertex_1, vertex_2;
     for (let i = 0; i < e; i++) {
         [vertex_1, vertex_2] = edges[i];
-        if (!graph.has(vertex_1)) {
-            graph.set(vertex_1, new Set());
-        }
 
-        if (!graph.has(vertex_2)) {
-            graph.set(vertex_2, new Set());
-        }
-
-        allVertex[vertex_1]++;
-        allVertex[vertex_2]++;
-
-        graph.get(vertex_1).add(vertex_2);
-        graph.get(vertex_2).add(vertex_1);
+        graph[vertex_1 - 1].push(vertex_2 - 1);
+        graph[vertex_2 - 1].push(vertex_1 - 1);
     }
+
+    // console.log(graph);
 
     let currentVertex;
     let currentGroup = 1;
@@ -36,7 +26,7 @@ var magnificentSets = function (n, edges) {
     const queue = [];
     let components = [];
 
-    for (let i = 1; i <= n; i++) {
+    for (let i = 0; i < n; i++) {
         if (markVertex[i] < 0) {
             const newComponent = [];
             queue.push(i);
@@ -45,11 +35,9 @@ var magnificentSets = function (n, edges) {
                 markVertex[currentVertex] = 1;
                 newComponent.push(currentVertex);
 
-                if (graph.has(currentVertex)) {
-                    for (let neig of graph.get(currentVertex).keys()) {
-                        if (markVertex[neig] < 0) {
-                            queue.push(neig);
-                        }
+                for (let neig of graph[currentVertex]) {
+                    if (markVertex[neig] < 0) {
+                        queue.push(neig);
                     }
                 }
             }
@@ -67,19 +55,18 @@ var magnificentSets = function (n, edges) {
             while (queue.length > pntQueue) {
                 currentGroup = queue[pntQueue++];
                 currentVertex = queue[pntQueue++];
+
                 currentMaxGroup = Math.max(currentMaxGroup, currentGroup);
 
-                if (graph.has(currentVertex)) {
-                    for (let neig of graph.get(currentVertex).keys()) {
-                        if (
-                            markVertex[neig] > 0 &&
-                            markVertex[currentVertex] % 2 === markVertex[neig] % 2
-                        ) {
-                            return -1;
-                        } else if (markVertex[neig] < 0) {
-                            markVertex[neig] = currentGroup + 1;
-                            queue.push(currentGroup + 1, neig);
-                        }
+                for (let neig of graph[currentVertex]) {
+                    if (
+                        markVertex[neig] > 0 &&
+                        markVertex[currentVertex] % 2 === markVertex[neig] % 2
+                    ) {
+                        return -1;
+                    } else if (markVertex[neig] < 0) {
+                        markVertex[neig] = currentGroup + 1;
+                        queue.push(currentGroup + 1, neig);
                     }
                 }
             }
