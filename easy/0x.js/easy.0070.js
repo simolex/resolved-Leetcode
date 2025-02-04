@@ -1,4 +1,6 @@
 /**
+ * 70. Climbing Stairs
+ *
  * @param {number} n
  * @return {number}
  */
