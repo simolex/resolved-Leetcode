@@ -1,14 +1,15 @@
 class MaxHeap {
-    constructor(
-        getKeyFn = function (item) {
-            return item.delta;
-        },
-        initValues = []
-    ) {
-        this._getKey = getKeyFn;
-        this.values = initValues;
+    constructor(props) {
+        const { getKeyFn, initValues } = props || {};
 
-        if (initValues.length > 0) {
+        this._getKey =
+            getKeyFn ||
+            function (item) {
+                return item;
+            };
+        this.values = initValues || [];
+
+        if (this.values.length > 0) {
             this.values = initValues;
             const lastElementWithChilds = Math.floor(initValues.length / 2) - 1;
             for (let i = lastElementWithChilds; i >= 0; i--) {
@@ -42,6 +43,10 @@ class MaxHeap {
             return false;
         }
         return this.values[0];
+    }
+
+    size() {
+        return this.values.length;
     }
 
     getAllValues() {

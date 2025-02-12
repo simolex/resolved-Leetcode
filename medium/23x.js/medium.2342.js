@@ -131,6 +131,58 @@ var maximumSum = function (nums) {
     return max;
 };
 
+// Version #2
+var maximumSum = function (nums) {
+    let hash;
+    let value;
+    let max = -1;
+
+    const mapHashes = new Map();
+
+    for (let num of nums) {
+        hash = 0;
+        value = num;
+        while (num > 0) {
+            hash += num % 10;
+            num = Math.trunc(num / 10);
+        }
+        if (mapHashes.has(hash)) {
+            max = Math.max(max, mapHashes.get(hash) + value);
+            mapHashes.set(hash, Math.max(mapHashes.get(hash), value));
+        } else {
+            mapHashes.set(hash, value);
+        }
+    }
+
+    return max;
+};
+
+// Version #3
+var maximumSum = function (nums) {
+    let hash;
+    let value;
+    let max = -1;
+
+    const mapHashes = {};
+
+    for (let num of nums) {
+        hash = 0;
+        value = num;
+        while (num > 0) {
+            hash += num % 10;
+            num = Math.floor(num / 10);
+        }
+        if (mapHashes[hash]) {
+            max = Math.max(max, mapHashes[hash] + value);
+            mapHashes[hash] = Math.max(mapHashes[hash], value);
+        } else {
+            mapHashes[hash] = value;
+        }
+    }
+
+    return max;
+};
+
 console.log(maximumSum([18, 43, 36, 13, 7]));
 console.log(maximumSum([10, 12, 19, 14]));
 console.log(
