@@ -75,11 +75,12 @@ class MaxHeap {
     }
 
     _siftDown(index) {
+        let leftChildIndex, rightChildIndex, swap;
         const length = this.values.length;
         while (index * 2 + 1 < length) {
-            let leftChildIndex = 2 * index + 1;
-            let rightChildIndex = 2 * index + 2;
-            let swap = leftChildIndex;
+            leftChildIndex = 2 * index + 1;
+            rightChildIndex = 2 * index + 2;
+            swap = leftChildIndex;
 
             if (
                 rightChildIndex < length &&
