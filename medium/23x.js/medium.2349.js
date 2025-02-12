@@ -113,23 +113,27 @@ class MinHeap {
             const rightChildIndex = 2 * index + 2;
             let smallestIndex = index;
 
-            if (leftChildIndex < this.heap.length && this.heap[leftChildIndex] < this.heap[smallestIndex]) {
+            if (
+                leftChildIndex < this.heap.length &&
+                this.heap[leftChildIndex] < this.heap[smallestIndex]
+            ) {
                 smallestIndex = leftChildIndex;
             }
 
-            if (rightChildIndex < this.heap.length && this.heap[rightChildIndex] < this.heap[smallestIndex]) {
+            if (
+                rightChildIndex < this.heap.length &&
+                this.heap[rightChildIndex] < this.heap[smallestIndex]
+            ) {
                 smallestIndex = rightChildIndex;
             }
 
             if (smallestIndex === index) break;
 
-            [this.heap[index], this.heap[smallestIndex]] = [this.heap[smallestIndex], this.heap[index]];
+            [this.heap[index], this.heap[smallestIndex]] = [
+                this.heap[smallestIndex],
+                this.heap[index],
+            ];
             index = smallestIndex;
         }
     }
 }
-
-// Пример использования:
-// const obj = new NumberContainers();
-// obj.change(index, number);
-// const param_2 = obj.find(number);

@@ -31,13 +31,17 @@ class MaxHeap {
     }
 
     pop() {
+        if (this.isEmpty()) {
+            return null;
+        }
+
         let index = 0;
-        const min = this.values[index];
+        const top = this.values[index];
         this.values[index] = this.values[this.values.length - 1];
 
         this._siftDown(index);
         this.values.pop();
-        return min;
+        return top;
     }
 
     peek() {
@@ -74,19 +78,19 @@ class MaxHeap {
 
     _siftDown(index) {
         const length = this.values.length;
-        while (index * 2 + 1 < length - 1) {
+        while (index * 2 + 1 < length) {
             let leftChildIndex = 2 * index + 1;
             let rightChildIndex = 2 * index + 2;
-            let leftChild, rightChild;
-            let swap = null;
-            leftChild = this.values[leftChildIndex];
-            rightChild = this.values[rightChildIndex];
+            let swap = leftChildIndex;
 
-            if (rightChildIndex === length) {
-                swap = leftChild;
+            if (
+                rightChildIndex < length &&
+                this._getKey(this.values[rightChildIndex]) >
+                    this._getKey(this.values[leftChildIndex])
+            ) {
+                swap = rightChildIndex;
             }
-            swap =
-                this._getKey(rightChild) >= this._getKey(leftChild) && swap === null ? rightChildIndex : leftChildIndex;
+
             if (this._getKey(this.values[swap]) > this._getKey(this.values[index])) {
                 this._swapItems(index, swap);
                 index = swap;
@@ -106,7 +110,7 @@ var maxAverageRatio = function (classes, extraStudents) {
         contest.push({
             delta: (pass + 1) / (total + 1) - pass / total,
             pass: pass + 1,
-            total: total + 1
+            total: total + 1,
         });
     });
 
@@ -118,7 +122,7 @@ var maxAverageRatio = function (classes, extraStudents) {
         contest.push({
             delta: (pass + 1) / (total + 1) - pass / total,
             pass: pass + 1,
-            total: total + 1
+            total: total + 1,
         });
 
         extraStudents--;
@@ -132,7 +136,7 @@ console.log(
         [
             [2, 2],
             [1, 2],
-            [3, 5]
+            [3, 5],
         ],
         2
     )
