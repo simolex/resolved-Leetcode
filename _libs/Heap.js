@@ -18,8 +18,10 @@ class Heap {
     pop() {
         if (this.isEmpty()) return null;
         const top = this.values[0];
-        this.values[0] = this.values.pop();
+        this.values[0] = this.values[this.values.length - 1];
         this._siftDown(0);
+        this.values.pop();
+
         return top;
     }
 
