@@ -17,25 +17,20 @@ var recoverFromPreorder = function (traversal) {
 
     res = regNode.exec(traversal);
     root = new TreeNode(Number(res[2]));
-    stack.push(0, root);
+    stack.push({ depth: 0, node: root });
 
     res = regNode.exec(traversal);
     while (stack.length && res !== null) {
-        node = stack.pop();
-        depth = stack.pop();
+        ({ depth, node } = stack.pop());
 
         if (res[1].length == depth + 1) {
             if (!node.left) {
                 node.left = new TreeNode(Number(res[2]));
-
-                stack.push(depth, node);
-                stack.push(depth + 1, node.left);
+                stack.push({ depth, node }, { depth: depth + 1, node: node.left });
             } else {
                 node.right = new TreeNode(Number(res[2]));
-
-                stack.push(depth + 1, node.right);
+                stack.push({ depth: depth + 1, node: node.right });
             }
-
             res = regNode.exec(traversal);
         }
     }
