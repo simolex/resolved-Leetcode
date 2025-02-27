@@ -48,6 +48,7 @@ var lenLongestFibSubseq = function (arr) {
             }
         }
     }
+    return max;
     return Math.max(...dp.values());
 };
 
