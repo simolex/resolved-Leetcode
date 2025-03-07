@@ -6,7 +6,7 @@
  * @return {number[]}
  */
 var searchRange = function (nums, target) {
-    const result = [-1, -1];
+    const result = [];
     let left = 0;
     let right = nums.length - 1;
     let mid;
@@ -29,14 +29,17 @@ var searchRange = function (nums, target) {
     right = nums.length - 1;
 
     while (left < right) {
-        mid = left + Math.floor((right - left) / 2);
-        if (nums[mid] < target) {
-            left = mid + 1;
+        mid = left + Math.ceil((right - left) / 2);
+        if (nums[mid] <= target) {
+            left = mid;
         } else {
-            right = mid;
+            right = mid - 1;
         }
     }
+    result.push(right);
+    return result;
 };
 
 console.log(searchRange([5, 7, 7, 8, 8, 10], 8));
-// console.log(searchRange([5, 7, 7, 8, 8, 10], 6));
+console.log(searchRange([5, 7, 7, 8, 8, 10], 6));
+console.log(searchRange([], 0));
