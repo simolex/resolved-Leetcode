@@ -1,4 +1,6 @@
 /**
+ * 36. Valid Sudoku
+ *
  * @param {character[][]} board
  * @return {boolean}
  */
