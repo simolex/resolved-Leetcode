@@ -19,7 +19,7 @@ var maximumTripletValue = function (nums) {
 
 var maximumTripletValue = function (nums) {
     let n = nums.length;
-    let maxT = -Infinity;
+    let maxT = 0;
 
     let maxI;
     for (let k = 2; k < n; k++) {
@@ -29,7 +29,7 @@ var maximumTripletValue = function (nums) {
             maxI = Math.max(maxI, nums[j]);
         }
     }
-    return maxT < 0 ? 0 : maxT;
+    return maxT;
 };
 
 console.log(maximumTripletValue([12, 6, 1, 2, 7]));
