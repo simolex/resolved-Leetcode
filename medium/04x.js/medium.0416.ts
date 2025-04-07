@@ -4,7 +4,7 @@
  * @param {number[]} nums
  * @return {boolean}
  */
-var canPartition = function (nums: number[]) {
+function canPartition(nums: number[]): boolean {
     let fullSum = 0;
     for (let num of nums) {
         fullSum += num;
@@ -26,7 +26,7 @@ var canPartition = function (nums: number[]) {
     }
 
     return dp[halfSum];
-};
+}
 
 console.log(canPartition([1, 5, 11, 5]));
 console.log(canPartition([1, 2, 3, 5]));
