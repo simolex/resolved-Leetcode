@@ -12,7 +12,7 @@ var distributeCookies = function (cookies, k) {
 
     const distribute = (indexBag = 0) => {
         if (indexBag >= n) {
-            max = Math.max(...child);
+            max = Math.max(...children);
             unfairness = Math.min(unfairness, max);
             return;
         }
