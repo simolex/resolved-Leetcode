@@ -1,0 +1,19 @@
+{
+    "name": "leetcode",
+    "version": "1.0.0",
+    "description": "",
+    "type": "commonjs",
+    "main": "index.js",
+    "scripts": {
+        "start": "ts-node"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^22.14.0",
+        "ts-node": "^10.9.2",
+        "tslib": "^2.8.1",
+        "typescript": "^5.8.3"
+    }
+}
