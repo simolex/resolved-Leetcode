@@ -11,11 +11,10 @@
  */
 
 /**
- *
+ * 83. Remove Duplicates from Sorted List
  */
-
-function deleteDuplicates(head: ListNode | null): ListNode | null {
-    const result = head;
+// @ts-ignore
+var deleteDuplicates = function (head: ListNode | null): ListNode | null {
     let current = head;
     while (current && current.next) {
         if (current.val === current.next.val) {
@@ -25,4 +24,4 @@ function deleteDuplicates(head: ListNode | null): ListNode | null {
         }
     }
     return head;
-}
+};
