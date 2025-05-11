@@ -7,6 +7,12 @@ class DSU {
     }
 
     find(v) {
+        while (this.parent[v] !== v) {
+            this.parent[v] = this.parent[this.parent[v]]; // Path compression
+            v = this.parent[v];
+        }
+        return v;
+
         return this.parent[v] === v ? v : (this.parent[v] = this.find(this.parent[v]));
     }
 
