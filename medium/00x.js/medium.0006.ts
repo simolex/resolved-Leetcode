@@ -23,12 +23,12 @@ function convert(s: string, numRows: number): string {
                     result += s[left];
                     continue;
                 }
-                if (left && left < len && left > 0) {
+                if (left < len && left > 0) {
                     result += s[left];
                 }
                 indeces[i]++;
 
-                if (right && right < len) {
+                if (right < len) {
                     result += s[right];
                 }
                 indeces[i + 1]--;
